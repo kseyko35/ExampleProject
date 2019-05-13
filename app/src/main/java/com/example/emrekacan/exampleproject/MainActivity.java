@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         setSupportActionBar(mToolbar);
-        mToolbar=findViewById(R.id.mainToolbar);
         mBackgroundImageView=findViewById(R.id.imgBackground);
         mAddNewNote=findViewById(R.id.addNoteButton);
 
