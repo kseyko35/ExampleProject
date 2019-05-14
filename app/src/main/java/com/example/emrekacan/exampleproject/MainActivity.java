@@ -10,6 +10,8 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
+import butterknife.ButterKnife;
+
 
 public class MainActivity extends AppCompatActivity {
     Toolbar mToolbar;
@@ -18,8 +20,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         setSupportActionBar(mToolbar);
         mBackgroundImageView=findViewById(R.id.imgBackground);
         mAddNewNote=findViewById(R.id.addNoteButton);
