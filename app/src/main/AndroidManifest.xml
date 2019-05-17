@@ -16,9 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <provider
-            android:authorities="com.example.emrekacan.exampleproject.databaseprovider"
-            android:name=".Data.DatabaseProvider"/>
+        <!-- <provider -->
+        <!-- android:authorities="com.example.emrekacan.exampleproject.databaseprovider" -->
+        <!-- android:name=".Data.DatabaseProvider"/> -->
+        <activity android:name=".ListActivity"></activity>
     </application>
 
 </manifest>

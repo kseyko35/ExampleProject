@@ -9,15 +9,16 @@
 
     <include
         android:id="@+id/include2"
-        layout="@layout/toolbar"
-        ></include>
+        layout="@layout/toolbar"></include>
 
     <ImageView
+        android:id="@+id/imgBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/imgBackground"
-        android:layout_below="@+id/include2"
-        />
+        android:layout_below="@+id/include2" />
+
+
+
     <include layout="@layout/empty_list"></include>
 
 </RelativeLayout>
