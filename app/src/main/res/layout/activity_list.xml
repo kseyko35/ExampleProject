@@ -4,13 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListActivity">
+    android:orientation="vertical"
+    tools:context=".ListActivity"
+    android:id="@+id/listActivity">
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/include2"
         android:id="@+id/recyclerView"
-        />
+        android:visibility="gone"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="There is nothing in List"
+        android:textAlignment="center"
+        android:gravity="center_vertical"
+        android:id="@+id/emptyList"
+        android:textSize="20dp" />
+
+
 
 </LinearLayout>

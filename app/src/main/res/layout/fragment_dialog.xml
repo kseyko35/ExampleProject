@@ -25,15 +25,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView"
+        android:layout_margin="10dp"
         android:hint="Enter The Note"
         android:textSize="16dp"
-        android:maxLines="1"/>
+
+        android:singleLine="true"
+        android:maxLength="20"/>
     <DatePicker
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/editNote"
         android:id="@+id/DatePicker"
         android:layout_centerHorizontal="true"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

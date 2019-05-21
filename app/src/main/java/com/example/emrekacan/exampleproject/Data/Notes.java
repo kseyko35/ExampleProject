@@ -1,6 +1,6 @@
 package com.example.emrekacan.exampleproject.Data;
 
-public class Notes {
+public class Notes  {
 
     private int id;
     private String noteContext;

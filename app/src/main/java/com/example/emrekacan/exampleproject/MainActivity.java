@@ -1,32 +1,25 @@
 package com.example.emrekacan.exampleproject;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.emrekacan.exampleproject.Adapter.RecyclerViewAdapter;
-import com.example.emrekacan.exampleproject.Data.DatabaseHelper;
-import com.example.emrekacan.exampleproject.Data.Notes;
-
-import java.util.ArrayList;
+import com.example.emrekacan.exampleproject.Fragment.FragmentDialogNewNote;
 
 import butterknife.ButterKnife;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+
+{
     Toolbar mToolbar;
     ImageView mBackgroundImageView;
-    Button mAddNewNote,mListButton;
-    ArrayList<Notes> mNotes=new ArrayList<>();
+    Button mAddNewNote, mListButton;
 
 
 
@@ -38,9 +31,9 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
 
 
-        mBackgroundImageView=findViewById(R.id.imgBackground);
-        mAddNewNote=findViewById(R.id.addNoteButton);
-        mListButton=findViewById(R.id.listNotes);
+        mBackgroundImageView = findViewById(R.id.imgBackground);
+        mAddNewNote = findViewById(R.id.addNoteButton);
+        mListButton = findViewById(R.id.listNotes);
 
         mListButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,15 +42,12 @@ public class MainActivity extends AppCompatActivity {
 //                    Toast.makeText(getApplicationContext(),"Your List is Empty", Toast.LENGTH_SHORT).show();
 //                }
 //                else{
-                    Intent intent = new Intent(getApplicationContext(), ListActivity.class);
-                    startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+                startActivity(intent);
 //                }
 
             }
         });
-
-
-
 
 
         Glide.with(this).load(R.drawable.bck).centerCrop().into(mBackgroundImageView);
@@ -72,10 +62,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void noteDialogShow() {
 
-        FragmentDialogNewNote newNote=new FragmentDialogNewNote();
-        newNote.show(getSupportFragmentManager(),"DialogNewNote");
+        FragmentDialogNewNote newNote = new FragmentDialogNewNote();
+        newNote.show(getSupportFragmentManager(), "DialogNewNote");
     }
-
 
 
 }

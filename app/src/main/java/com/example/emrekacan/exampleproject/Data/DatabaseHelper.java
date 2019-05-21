@@ -67,6 +67,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor data = db.rawQuery(query, null);
         return data;
     }
+    public void updateName(String newName, int id, String oldName){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "UPDATE " + TABLE_NAME + " SET " + COL2 +
+                " = '" + newName + "' WHERE " + COL1 + " = '" + id + "'" +
+                " AND " + COL2 + " = '" + oldName + "'";
+        Log.d(TAG, "updateName: query: " + query);
+        Log.d(TAG, "updateName: Setting name to " + newName);
+        db.execSQL(query);
+    }
     public Cursor getData(){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME;
@@ -83,14 +92,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query);
         db.close();
     }
-    public Integer deleteNote(int id){
-        SQLiteDatabase db=this.getWritableDatabase();
-        return db.delete(TABLE_NAME,"ID = ?",new String[] {String.valueOf(id)});
-    }
-    public void delete_byID(int id){
-        SQLiteDatabase db=this.getWritableDatabase();
-        db.delete(TABLE_NAME, "", null);
-    }
+
 
 }
 

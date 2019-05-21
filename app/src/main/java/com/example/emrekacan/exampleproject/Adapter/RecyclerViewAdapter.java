@@ -3,17 +3,16 @@ package com.example.emrekacan.exampleproject.Adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.emrekacan.exampleproject.Data.DatabaseHelper;
 import com.example.emrekacan.exampleproject.Data.Notes;
 import com.example.emrekacan.exampleproject.R;
 
-import java.sql.Struct;
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.NoteHolder> {
@@ -22,10 +21,29 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     ArrayList<Notes> allNotes;
     DatabaseHelper mDatabaseHelper;
 
-    public RecyclerViewAdapter(Context context, ArrayList<Notes> mNotes){
-        mInflater=LayoutInflater.from(context);
+    Listener mListener;
+    EditListener mEditListener;
+
+
+
+    public interface Listener {
+        void showMessage();
+    }
+    public interface EditListener{
+        void showEditFragment(String data, int position);
+    }
+
+
+
+
+    public RecyclerViewAdapter(Context context, ArrayList<Notes> mNotes,Listener listener,EditListener editlistener){
+        mEditListener=editlistener;
+        mListener = listener;
+        this.mInflater=LayoutInflater.from(context);
         allNotes=mNotes;
         mDatabaseHelper=new DatabaseHelper(context);
+
+
     }
 
     @NonNull
@@ -38,27 +56,45 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull final NoteHolder noteHolder, int i) {
-        noteHolder.mTextDate.setText(allNotes.get(i).getNoteContext());
-        noteHolder.mTextContext.setText(allNotes.get(i).getDate());
+        noteHolder.mTextContext.setText(allNotes.get(i).getNoteContext());
+        noteHolder.mTextDate.setText(allNotes.get(i).getDate());
 
         noteHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int newPosition = noteHolder.getAdapterPosition();
-                Log.d("thien.van","on Click onBindViewHolder");
+
+                mDatabaseHelper.deleteName(allNotes.get(newPosition).getId());
                 allNotes.remove(newPosition);
                 notifyItemRemoved(newPosition);
                 notifyItemRangeChanged(newPosition, allNotes.size());
-                int data= allNotes.get(newPosition).getId();
-                mDatabaseHelper.deleteName(allNotes.get(newPosition).getId());
+                if(allNotes.size()== 0) {
+                    if (mListener != null){
+                        mListener.showMessage();
+                    }
+                }
 
-
-//                int data=allNotes.get(newPosition).getId();
-//                mDatabaseHelper.deleteNote(allNotes.get(newPosition).getId());
-//                mDatabaseHelper.delete_byID(allNotes.get(newPosition).getId());
 
             }
+
         });
+        noteHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(v.getContext(),Integer.toString(noteHolder.getAdapterPosition()) ,Toast.LENGTH_SHORT).show();
+//                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+//                EditFragment editNote = new EditFragment();
+//                activity.getSupportFragmentManager().beginTransaction().add(R.id.listActivity,editNote).commit();
+                if (mEditListener != null){
+                    String editData=allNotes.get(noteHolder.getAdapterPosition()).getNoteContext();
+                    int newPosition=allNotes.get(noteHolder.getAdapterPosition()).getId();
+                    mEditListener.showEditFragment(editData,newPosition);
+
+                }
+                return true;
+            }
+        });
+
 
     }
 
@@ -72,6 +108,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         TextView mTextContext;
         TextView mTextDate;
+//        FrameLayout mEditFrameLayout;
 
 
         public NoteHolder(@NonNull View itemView) {
@@ -79,7 +116,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
             mTextContext=itemView.findViewById(R.id.textViewContext);
             mTextDate=itemView.findViewById(R.id.textViewDate);
-
+//            mEditFrameLayout=itemView.findViewById(R.id.editFrameLayout)
 
         }
     }

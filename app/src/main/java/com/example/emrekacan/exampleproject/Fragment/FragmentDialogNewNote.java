@@ -1,4 +1,4 @@
-package com.example.emrekacan.exampleproject;
+package com.example.emrekacan.exampleproject.Fragment;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -23,6 +23,7 @@ import android.widget.Toast;
 //import com.example.emrekacan.exampleproject.Data.DatabaseHelper;
 
 import com.example.emrekacan.exampleproject.Data.DatabaseHelper;
+import com.example.emrekacan.exampleproject.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,6 +39,7 @@ public class FragmentDialogNewNote extends DialogFragment {
     EditText mEditNote;
     @BindView(R.id.DatePicker)
     DatePicker mDatePicker;
+
     DatabaseHelper mDatabaseHelper;
 //    static final Uri CONTENT_URI1= DatabaseProvider.CONTENT_URI;
 
@@ -70,6 +72,7 @@ public class FragmentDialogNewNote extends DialogFragment {
 //                Uri uri=getActivity().getContentResolver().insert(CONTENT_URI1,values);
 //                Toast.makeText(getContext(), " " + uri, Toast.LENGTH_SHORT).show();
                 String newEntry= mEditNote.getText().toString();
+                mDatePicker.setMinDate(System.currentTimeMillis());
                 int month=mDatePicker.getMonth()+1;
                 int day=mDatePicker.getDayOfMonth();
                 int year=mDatePicker.getYear();
